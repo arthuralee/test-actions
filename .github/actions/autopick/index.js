@@ -35,15 +35,15 @@ async function run() {
   const targetBranchName = `release-${targetVersion}`;
   execSync(`git checkout ${targetBranchName}`);
   execSync(`git checkout -b ${branchName}`);
-  execSync(`git cherry-pick ${pr.merge_commit_sha}`);
-  execSync(`git push --set-upstream origin ${branchName}`);
+  execSync(`git cherry-pick ${pr.data.merge_commit_sha}`);
+  execSync(`git push --set-upstream --force origin ${branchName}`);
 
   // Create PR
   const newPr = await octokit.rest.pulls.create({
     ...context.repo,
     head: branchName,
     base: targetBranchName,
-    title: `[🍒⛏ ${targetVersion}] ${pr.data.title}`,
+    title: `[🍒⛏  ${targetVersion}] ${pr.data.title}`,
     body: `Automatic cherry-pick PR based on #${prNumber}`,
   });
 
@@ -51,6 +51,7 @@ async function run() {
     ...context.repo,
     pull_number: newPr.data.number,
     reviewers: [context.actor],
+    team_reviewers: [],
   });
 }
 

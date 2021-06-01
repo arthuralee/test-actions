@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetchDepth: 0 # Fetch everything so we can mess around with branches
+          fetch-depth: 0 # Fetch everything so we can mess around with branches
       - name: yarn
         working-directory: ./.github/actions/autopick
         run: yarn
