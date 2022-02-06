@@ -46,16 +46,23 @@ async function runCherrypick(args) {
     return;
   }
 
+  const version = args[0];
+
+  if (!version) {
+    await comment('Error: Please specify version to cherry pick to, e.g. `/cherrypick 5.101`');
+    return;
+  }
+
   await octokit.actions.createWorkflowDispatch({
     ...context.repo,
     workflow_id: 'autopick.yml',
     inputs: {
-      targetVersion: args[0],
+      targetVersion: version,
       prNumber,
     }
   });
 
-  await comment(`Sit tight! We've kicked off a cherry-pick for ${args[0]}.`);
+  await comment(`Sit tight! We've kicked off a cherry-pick for ${version}.`);
 }
 
 async function dispatchCommand(command, args) {
