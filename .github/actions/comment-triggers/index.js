@@ -90,5 +90,5 @@ async function run() {
 }
 
 run().catch(error => {
-	core.setFailed(error.message);
+  comment(`Oh no! Something went wrong and I couldn't process your command.\n\n\`\`\`${error}\`\`\``);
 });
