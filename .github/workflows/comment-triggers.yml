@@ -1,0 +1,19 @@
+name: Comment triggers
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  automate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: yarn
+        working-directory: ./.github/actions
+        run: yarn
+      - name: Comment triggers
+        uses: ./.github/actions/comment-triggers
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,9 @@
+name: 'Comment triggers'
+description: 'Comment bot'
+inputs:
+  githubToken:
+    description: 'API token automatically injected by Github'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'

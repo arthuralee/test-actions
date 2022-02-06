@@ -20,7 +20,7 @@ jobs:
         with:
           fetch-depth: 0 # Fetch everything so we can mess around with branches
       - name: yarn
-        working-directory: ./.github/actions/autopick
+        working-directory: ./.github/actions
         run: yarn
       - name: Prepare git configs
         run: |
