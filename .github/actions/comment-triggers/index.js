@@ -31,6 +31,21 @@ async function runHelp(command) {
 }
 
 async function runCherrypick(args) {
+	const pr = await octokit.pulls.get({
+		...context.repo,
+		pull_number: prNumber,
+	});
+
+  if (pr.data.state !== 'closed' || !pr.data.merged) {
+    await comment('Error: Only PRs that have been merged can be cherry-picked.');
+    return;
+  }
+
+  if (pr.data.base.ref !== pr.data.head.repo.default_branch) {
+    await comment(`Error: Only PRs merged to ${pr.data.head.repo.default_branch} can be cherry-picked.`);
+    return;
+  }
+
   await octokit.actions.createWorkflowDispatch({
     ...context.repo,
     workflow_id: 'autopick.yml',
@@ -38,7 +53,9 @@ async function runCherrypick(args) {
       targetVersion: args[0],
       prNumber,
     }
-  })
+  });
+
+  await comment(`Sit tight! We've kicked off a cherry-pick for ${args[0]}.`);
 }
 
 async function dispatchCommand(command, args) {
