@@ -6,15 +6,19 @@ const octokit = github.getOctokit(githubToken);
 
 const { context } = github;
 
+const commentBody = context.payload.comment.body;
+const prNumber = context.payload.issue.number;
+
 async function run() {
-	console.warn(context);
-  const commentBody = context.payload.comment.body;
-  const prNumber = context.payload.issue.number;
+
+  const argv = commentBody.substring(1).split(' ');
+  const command = argv[0];
+  const args = argv.slice(1);
 
   await octokit.issues.createComment({
     ...context.repo,
     issue_number: prNumber,
-    body: `You said: ${commentBody}`,
+    body: `Command: ${command}\nArguments: ${args}`,
   })
 }
 

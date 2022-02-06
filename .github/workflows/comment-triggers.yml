@@ -6,6 +6,7 @@ on:
 
 jobs:
   automate:
+    # Only trigger on comments that start with slash "/"
     if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/')}}
     runs-on: ubuntu-latest
     steps:
