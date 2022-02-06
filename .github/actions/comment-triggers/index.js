@@ -56,6 +56,7 @@ async function runCherrypick(args) {
   await octokit.actions.createWorkflowDispatch({
     ...context.repo,
     workflow_id: 'autopick.yml',
+    ref: context.repo.default_branch,
     inputs: {
       targetVersion: version,
       prNumber,
