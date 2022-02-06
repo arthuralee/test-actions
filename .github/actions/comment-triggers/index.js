@@ -73,8 +73,10 @@ async function dispatchCommand(command, args) {
       break;
     case 'help':
       await runHelp();
+      break;
     default:
       await runHelp(command);
+      break;
   }
 }
 
