@@ -19,7 +19,7 @@ async function comment(body) {
 
 const HELP_STRING = `Here are the commands you can use:
 
-- \`/cherrypick [version]\` Request a cherry-pick into the release branch of version [version]. E.g. `/cherrypick 5.101`
+- \`/cherrypick [version]\` Request a cherry-pick into the release branch of version [version]. E.g. \`/cherrypick 5.101\`
 - \`/help\` Show this help screen`
 
 async function runHelp(command) {
@@ -72,7 +72,7 @@ async function dispatchCommand(command, args) {
 }
 
 async function run() {
-  const argv = commentBody.substring(1).split(' ');
+  const argv = commentBody.split('\n')[0].substring(1).split(' ');
   const command = argv[0];
   const args = argv.slice(1);
 
