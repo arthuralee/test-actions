@@ -90,5 +90,11 @@ async function run() {
 }
 
 run().catch(error => {
-  comment(`Oh no! Something went wrong and I couldn't process your command.\n\n\`\`\`${error}\`\`\``);
+  const url = `${ github.server_url }/${ github.repository }/actions/runs/${ github.run_id }`;
+  comment(`Oh no! Something went wrong and I couldn't process your command.
+
+\`\`\`
+${error}
+\`\`\`
+${url}`);
 });
