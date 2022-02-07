@@ -17,5 +17,7 @@ jobs:
         run: yarn
       - name: Comment triggers
         uses: ./.github/actions/comment-triggers
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}

@@ -90,7 +90,7 @@ async function run() {
 }
 
 run().catch(error => {
-  const url = `${ github.server_url }/${ github.repository }/actions/runs/${ github.run_id }`;
+  const url = process.env.RUN_URL;
   comment(`Oh no! Something went wrong and I couldn't process your command.
 
 \`\`\`
