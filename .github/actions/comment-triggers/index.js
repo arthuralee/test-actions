@@ -58,8 +58,8 @@ async function runCherrypick(args) {
     workflow_id: 'autopick.yml',
     ref: 'main',
     inputs: {
-      targetVersion: version,
-      prNumber: prNumber.toString(),
+      version: version,
+      pull_request_number: prNumber.toString(),
     }
   });
 
